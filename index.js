@@ -1,6 +1,7 @@
-let cookies = document.cookie;
-cookies = cookies.split(";");
-cookies = cookies.map(cookie => cookie.replace(" ", ""));
+// cookie = 貼上
 let text = "{";
-for (i=0;i<cookies.length;i++) {x=cookies[i].split("="); text+="\""+x[0]+"\""+": "+x[1]+",\n";}
+for (i=0;i<cookie.length;i++) {
+    text+="\""+a[i].name+"\": \""+a[i].value+"\",\n"
+}
 text += "}"
+console.log(text)
