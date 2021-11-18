@@ -1,0 +1,10 @@
+certifi @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/77/74/3e/daf57610ff13227e3b3f50a78487055f6ac94cc9363abd2463be34c5e9/certifi-2021.10.8-py2.py3-none-any.whl
+cffi @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/e6/3a/ed/211634ffd1f9ed0a6957a6981ef59f3af9934e62dc2ee15819d9623196/cffi-1.15.0-cp38-cp38-macosx_10_9_x86_64.whl
+charset-normalizer @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/23/43/96/9c5bffd9765f723eb96925cec608e36125667e8f31b6b3152f0b51716f/charset_normalizer-2.0.7-py3-none-any.whl
+fake-useragent @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/66/84/20/fff7ca6bc3704cf6e92a188ff801ebd81aef2210881e1f17069db5a84e/fake-useragent-0.1.11.tar.gz
+idna @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/f7/09/c9/8e80952436ff87855ddff4891a35ecf913b2b5dc97911f02a070ff2b1f/idna-3.3-py3-none-any.whl
+pycparser @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/7a/f7/3b/fd50e9d7e1c02d2d2e8631fca716f6b6ffe3742f322e4a170eb3f2f41b/pycparser-2.21-py2.py3-none-any.whl
+PyNaCl @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/b8/69/cb/05692838c24c4def2104569028c64f988a4fbf8eed9ec1297d8cff319f/PyNaCl-1.4.0-cp35-abi3-macosx_10_10_x86_64.whl
+requests @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/97/12/e1/3c2e2b7f315a912e2da1b1465a23c3f14d51a3bd4696e14e0f2796adde/requests-2.26.0-py2.py3-none-any.whl
+six @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/48/e6/04/8118155ae3ec3a16dd2a213bbf7a7d8a62c596b2e90f73a22c896269f1/six-1.16.0-py2.py3-none-any.whl
+urllib3 @ file:///Users/tdc/Library/Caches/pypoetry/artifacts/d8/12/e2/1b499db5e41e88fd0f31d0e056a4dc7b53824f63f027fffc1702969c57/urllib3-1.26.7-py2.py3-none-any.whl
