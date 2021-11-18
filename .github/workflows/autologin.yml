@@ -1,0 +1,36 @@
+name: Daily Sign
+
+on:
+  push:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install requirements
+      run: |
+        pip install -r requirements.txt
+    - name: do sign
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        BOOKS_ID: ${{ secrets.BOOKS_ID }}
+        BOOKS_PWD: ${{ secrets.BOOKS_PWD }}
+        COOKIES: ${{ secrets.COOKIES }}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+      run: |
+        python main.py
