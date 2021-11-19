@@ -1,7 +1,6 @@
 // cookie = 貼上
-let text = "{";
-for (i=0;i<cookie.length;i++) {
-    text+="\""+cookie[i].name+"\": \""+cookie[i].value+"\",\n"
+let cookiejar = {};
+for(var c of cookie) {
+  cookiejar[c.name] = c.value;
 }
-text += "}"
-console.log(text)
+console.log(JSON.stringify(cookiejar))
