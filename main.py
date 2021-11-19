@@ -83,7 +83,9 @@ def do_check():
     session.headers = {'user-agent': random.choice(UA)}
     session.cookies = requests.utils.cookiejar_from_dict(json.loads(COOKIES))
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
-    # if r.status_code == 200
+    if r.status_code != 200:
+        bot.sendMessage('❌ 博客來簽到發生錯誤！\n🍪 餅乾已過期')
+        return
     if 'Set-Cookie' in r.headers.keys():
         update_secret('cookies', json.dumps(r.cookies.get_dict()))
 
