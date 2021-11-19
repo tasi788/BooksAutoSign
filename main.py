@@ -99,9 +99,11 @@ def do_check():
         logger.error(r.text)
 
     text = ''
+    now = datetime.now(tz)
     if status == 'success':
         text += '博客來簽到成功！\n'
         text += '✅ ' + msg[5:]
+        text += f'#books #{now.strftime("%Y%m%d")}'
     if status == None:
         text += '❌ 博客來簽到發生錯誤！'
 
