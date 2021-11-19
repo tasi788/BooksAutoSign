@@ -16,7 +16,7 @@ logging.basicConfig(level='INFO',
 
 GH_REPO = os.getenv('GH_REPO')
 GH_TOKEN = os.getenv('GH_TOKEN')
-COOKIES = os.getenv('BOOKS_COOKIE')
+COOKIES = os.getenv('COOKIES')
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ID = os.getenv('CHAT_ID')
 BOOKS_ID = os.getenv('BOOKS_ID')
