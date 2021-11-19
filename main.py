@@ -73,7 +73,7 @@ def do_check():
         sys.exit(1)
     bot = Bot(BOT_TOKEN, CHAT_ID)
     session = requests.Session()
-    session.headers = {'user-agent': UA['google chrome']}
+    session.headers = {'user-agent': UA['chrome']}
     session.cookies = requests.utils.cookiejar_from_dict(json.loads(COOKIES))
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
     # if r.status_code == 200
