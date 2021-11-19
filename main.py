@@ -1,12 +1,14 @@
-from datetime import datetime, timedelta, timezone
+import json
 import logging
 import os
-import requests
-from nacl import encoding, public
-from base64 import b64encode
 import sys
-from fake_useragent import UserAgent
+from base64 import b64encode
+from datetime import datetime, timedelta, timezone
 from json import JSONDecodeError
+
+import requests
+from fake_useragent import UserAgent
+from nacl import encoding, public
 
 tz = timezone(timedelta(hours=+8))
 today = datetime.now(tz)
@@ -37,6 +39,7 @@ class Bot:
                               'text': text,
                               'parse_mode': 'html'
                           })
+
 
 def update_secret(keys: str, value: str):
     base_url = f'https://api.github.com/repos/{GH_REPO}/actions/secrets'
@@ -86,7 +89,7 @@ def do_check():
     msg = ''
     try:
         status = r.json()['status']
-        msg = r.json()['msg']
+        msg = r.json(cls=json.JSONDecoder)['msg']
     except JSONDecodeError:
         logger.error('非預期內容')
         logger.error(r.text)
