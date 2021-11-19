@@ -12,18 +12,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-      with:
-        fetch-depth: 0
     - uses: actions/cache@v2
+      id: cache
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+        path: |
+          ~/.cache/pip
+          ${{ github.workspace }}/dist
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'main.py', '**/autologin.yml') }}
     - name: Install requirements
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         pip install -r requirements.txt
-    - name: do sign
+    - name: do sign (python)
+      if: steps.cache.outputs.cache-hit != 'true'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_REPO: ${{ github.repository }}
@@ -32,3 +33,18 @@ jobs:
         CHAT_ID: ${{ secrets.CHAT_ID }}
       run: |
         python main.py
+    - name: Pack as one
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        pip install pyinstaller
+        pyinstaller main.py --onefile
+    - name: do sign (pack)
+      if: steps.cache.outputs.cache-hit == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        COOKIES: ${{ secrets.BOOKS_COOKIE }}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+      run: |
+         ${{ github.workspace }}/dist/main
