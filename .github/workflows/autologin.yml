@@ -2,8 +2,8 @@ name: Daily Sign
 
 on:
   push:
-  schedule:
-    - cron: '0 * * * *'
+  #  schedule:
+  #    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
         pip install -r requirements.txt
     - name: do sign
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_REPO: ${{ github.repository }}
         BOOKS_ID: ${{ secrets.BOOKS_ID }}
         BOOKS_PWD: ${{ secrets.BOOKS_PWD }}

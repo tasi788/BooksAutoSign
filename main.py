@@ -64,7 +64,7 @@ def update_secret(keys: str, value: str):
         logger.critical('上傳 SECRET 失敗。')
 
 
-def do_check(cookie: dict = None):
+def do_check():
     if not COOKIES:
         logger.fatal('找不到餅乾。')
         sys.exit(1)
