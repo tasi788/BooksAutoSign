@@ -1,12 +1,13 @@
 import json
 import logging
 import os
+import random
 import sys
 from base64 import b64encode
 from datetime import datetime, timedelta, timezone
 
 import requests
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 from nacl import encoding, public
 from simplejson.errors import JSONDecodeError
 
@@ -23,7 +24,13 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ID = os.getenv('CHAT_ID')
 BOOKS_ID = os.getenv('BOOKS_ID')
 BOOKS_PWD = os.getenv('BOOKS_PWD')
-UA = UserAgent()
+UA = ["Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36",
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2226.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 6.4; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36"]
 
 
 class Bot:
@@ -73,7 +80,7 @@ def do_check():
         sys.exit(1)
     bot = Bot(BOT_TOKEN, CHAT_ID)
     session = requests.Session()
-    session.headers = {'user-agent': UA['chrome']}
+    session.headers = {'user-agent': random.choice(UA)}
     session.cookies = requests.utils.cookiejar_from_dict(json.loads(COOKIES))
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
     # if r.status_code == 200
