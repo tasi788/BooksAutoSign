@@ -88,8 +88,8 @@ def do_check():
     status = None
     msg = ''
     try:
-        status = r.json()['status']
-        msg = r.json(cls=json.JSONDecoder)['msg']
+        status = r.json(cls=json.JSONDecoder)['status']
+        msg = r.json()['msg']
     except JSONDecodeError:
         logger.error('非預期內容')
         logger.error(r.text)
