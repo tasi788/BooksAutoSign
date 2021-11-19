@@ -1,14 +1,15 @@
-import json
 import logging
 import os
 import sys
 from base64 import b64encode
 from datetime import datetime, timedelta, timezone
-from json import JSONDecodeError
+
 
 import requests
 from fake_useragent import UserAgent
 from nacl import encoding, public
+from simplejson.errors import JSONDecodeError
+
 
 tz = timezone(timedelta(hours=+8))
 today = datetime.now(tz)
@@ -88,7 +89,7 @@ def do_check():
     status = None
     msg = ''
     try:
-        status = r.json(cls=json.JSONDecoder)['status']
+        status = r.json()['status']
         msg = r.json()['msg']
     except JSONDecodeError:
         logger.error('非預期內容')

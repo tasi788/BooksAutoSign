@@ -9,6 +9,7 @@ python = "^3.8"
 requests = "^2.26.0"
 PyNaCl = "^1.4.0"
 fake-useragent = "^0.1.11"
+simplejson = "^3.17.6"
 
 [tool.poetry.dev-dependencies]
 
