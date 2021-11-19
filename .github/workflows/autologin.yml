@@ -27,8 +27,6 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_REPO: ${{ github.repository }}
-        BOOKS_ID: ${{ secrets.BOOKS_ID }}
-        BOOKS_PWD: ${{ secrets.BOOKS_PWD }}
         COOKIES: ${{ secrets.BOOKS_COOKIE }}
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
