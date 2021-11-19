@@ -1,15 +1,14 @@
+import json
 import logging
 import os
 import sys
 from base64 import b64encode
 from datetime import datetime, timedelta, timezone
 
-
 import requests
 from fake_useragent import UserAgent
 from nacl import encoding, public
 from simplejson.errors import JSONDecodeError
-
 
 tz = timezone(timedelta(hours=+8))
 today = datetime.now(tz)
@@ -73,16 +72,13 @@ def do_check():
         logger.fatal('找不到餅乾。')
         sys.exit(1)
     bot = Bot(BOT_TOKEN, CHAT_ID)
-    cookies = eval(COOKIES)
     session = requests.Session()
     session.headers = {'user-agent': UA['google chrome']}
-    session.cookies = requests.utils.cookiejar_from_dict(cookies)
+    session.cookies = requests.utils.cookiejar_from_dict(json.loads(COOKIES))
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
     # if r.status_code == 200
     if 'Set-Cookie' in r.headers.keys():
-        new_cookies = r.headers['Set-Cookie']
-        update_secret('cookies', new_cookies)
-        # 塞進 secrets
+        update_secret('cookies', json.dumps(r.cookies.get_dict()))
 
     r = session.get('https://myaccount.books.com.tw/myaccount/reader/dailySignIn/?ru=P5zqo53d')
 
