@@ -86,6 +86,7 @@ def do_check():
             extract = dict()
             for rows in cookie:
                 extract[rows['name']]  = rows['value']
+            update_secret('BOOKS_COOKIE', json.dumps(extract))
 
     bot = Bot(BOT_TOKEN, CHAT_ID)
     session = requests.Session()
@@ -96,7 +97,7 @@ def do_check():
         bot.sendMessage('❌ 博客來簽到發生錯誤！\n🍪 餅乾已過期')
         return
     if 'Set-Cookie' in r.headers.keys():
-        update_secret('cookies', json.dumps(r.cookies.get_dict()))
+        update_secret('BOOKS_COOKIE', json.dumps(r.cookies.get_dict()))
 
     r = session.get('https://myaccount.books.com.tw/myaccount/reader/dailySignIn/?ru=P5zqo53d')
 
