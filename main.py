@@ -44,6 +44,9 @@ class Bot:
                               'text': text,
                               'parse_mode': 'html'
                           })
+        if r.status_code != 200:
+            logger.warning(f'Telegram 訊息發送錯誤 {r.status_code}')
+            logger.warning(r,text)
 
 
 def update_secret(keys: str, value: str):
