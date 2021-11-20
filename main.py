@@ -80,13 +80,14 @@ def do_check():
     if not COOKIES:
         logger.fatal('找不到餅乾。')
         sys.exit(1)
-    else:
-        cookie = json.loads(COOKIES)
-        if isinstance(cookie, list):
-            extract = dict()
-            for rows in cookie:
-                extract[rows['name']]  = rows['value']
-            update_secret('BOOKS_COOKIE', json.dumps(extract))
+    # else:
+    cookie = json.loads(COOKIES)
+    if isinstance(cookie, list):
+        extract = dict()
+        for rows in cookie:
+            extract[rows['name']]  = rows['value']
+        update_secret('BOOKS_COOKIE', json.dumps(extract))
+        cookie = extract
 
     bot = Bot(BOT_TOKEN, CHAT_ID)
     session = requests.Session()
