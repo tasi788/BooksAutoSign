@@ -76,13 +76,21 @@ def update_secret(keys: str, value: str):
 
 
 def do_check():
+    cookie = ''
     if not COOKIES:
         logger.fatal('找不到餅乾。')
         sys.exit(1)
+    else:
+        cookie = json.loads(COOKIES)
+        if isinstance(cookie, list):
+            extract = dict()
+            for rows in cookie:
+                extract[rows['name']]  = rows['value']
+
     bot = Bot(BOT_TOKEN, CHAT_ID)
     session = requests.Session()
     session.headers = {'user-agent': random.choice(UA)}
-    session.cookies = requests.utils.cookiejar_from_dict(json.loads(COOKIES))
+    session.cookies = requests.utils.cookiejar_from_dict(cookie)
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
     if r.status_code != 200:
         bot.sendMessage('❌ 博客來簽到發生錯誤！\n🍪 餅乾已過期')
@@ -107,8 +115,11 @@ def do_check():
         text += '博客來簽到成功！\n'
         text += '✅ ' + msg[5:]
         text += f'#books #{now.strftime("%Y%m%d")}'
+    if status == 'signined':
+        text += '👌 博客來今日已簽過！'
     if status == None:
         text += '❌ 博客來簽到發生錯誤！'
+    bot.sendMessage(text)
 
 
 if __name__ == '__main__':
