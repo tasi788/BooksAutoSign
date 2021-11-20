@@ -115,7 +115,7 @@ def do_check():
     now = datetime.now(tz)
     if status == 'success':
         text += '博客來簽到成功！\n'
-        text += '✅ ' + msg[5:]
+        text += '✅ ' + msg[5:] + '\n'
         text += f'#books #{now.strftime("%Y%m%d")}'
     if status == 'signined':
         text += '👌 博客來今日已簽過！'
