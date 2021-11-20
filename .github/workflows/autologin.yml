@@ -19,12 +19,7 @@ jobs:
           ~/.cache/pip
           ${{ github.workspace }}/dist
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'main.py', '**/autologin.yml') }}
-    - name: Install requirements
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        pip install -r requirements.txt
-    - name: do sign (python)
-      if: steps.cache.outputs.cache-hit != 'true'
+    - name: do sign
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_REPO: ${{ github.repository }}
@@ -32,19 +27,14 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
       run: |
-        python main.py
+        if [[ -e ${{ github.workspace }}/dist/main ]]; then
+          ${{ github.workspace }}/dist/main
+        else
+          pip install -r requirements.txt
+          python main.py
+        fi
     - name: Pack as one
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         pip install pyinstaller
         pyinstaller main.py --onefile
-    - name: do sign (pack)
-      if: steps.cache.outputs.cache-hit == 'true'
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ github.repository }}
-        COOKIES: ${{ secrets.BOOKS_COOKIE }}
-        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        CHAT_ID: ${{ secrets.CHAT_ID }}
-      run: |
-         ${{ github.workspace }}/dist/main
