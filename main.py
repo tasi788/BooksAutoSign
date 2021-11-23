@@ -86,7 +86,7 @@ def do_check():
     if isinstance(cookie, list):
         extract = dict()
         for rows in cookie:
-            extract[rows['name']]  = rows['value']
+            extract[rows['name']] = rows['value']
         update_secret('BOOKS_COOKIE', json.dumps(extract))
         cookie = extract
 
@@ -95,6 +95,8 @@ def do_check():
     session.headers = {'user-agent': random.choice(UA)}
     session.cookies = requests.utils.cookiejar_from_dict(cookie)
     r = session.get('https://myaccount.books.com.tw/myaccount/myaccount/getReorder', allow_redirects=False)
+
+    logger.info(r.headers.keys())
     if r.status_code != 200:
         bot.sendMessage('❌ 博客來簽到發生錯誤！\n🍪 餅乾已過期')
         return
