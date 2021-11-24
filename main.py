@@ -86,7 +86,7 @@ def do_check():
     if isinstance(cookie, list):
         extract = dict()
         for rows in cookie:
-            extract[rows['name']]  = rows['value']
+            extract[rows['name']] = rows['value']
         update_secret('BOOKS_COOKIE', json.dumps(extract))
         cookie = extract
 
